@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "mintlify dev",
-    "validate:openapi": "lint-openapi ./api-reference/openapi.json"
+    "validate:openapi": "lint-openapi ./api-reference/openapi.json -e"
   },
   "devDependencies": {
     "mintlify": "4.0.510",
