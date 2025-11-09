@@ -42,7 +42,7 @@ export const resendEmail = (
       ) => {
          const payload: any = {
             from,
-            to,
+            to: [to],
             subject,
          };
 
@@ -53,13 +53,35 @@ export const resendEmail = (
             payload.text = body.text;
          }
 
+         if (options?.bcc) {
+            payload.bcc = options.bcc;
+         }
+         if (options?.cc) {
+            payload.cc = options.cc;
+         }
+         if (options?.reply_to) {
+            payload.reply_to = options.reply_to;
+         }
+         if (options?.scheduled_at) {
+            payload.scheduled_at = options.scheduled_at;
+         }
+         if (options?.headers) {
+            payload.headers = options.headers;
+         }
+         if (options?.attachments) {
+            payload.attachments = options.attachments;
+         }
+         if (options?.tags) {
+            payload.tags = options.tags;
+         }
+
          const res = await fetch(host, {
             method: "POST",
             headers: {
                "Content-Type": "application/json",
                Authorization: `Bearer ${config.apiKey}`,
             },
-            body: JSON.stringify({ ...payload, ...options }),
+            body: JSON.stringify(payload),
          });
 
          if (!res.ok) {
